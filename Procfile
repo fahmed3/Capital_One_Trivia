@@ -1,1 +1,1 @@
-web: gunicorn trivia:app
+web: python trivia/app.py
