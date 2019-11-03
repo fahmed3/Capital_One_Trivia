@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron" >
+  <h1>Clues</h1>
+  </p>
+</div>
+
+<div class="container-fluid" >
+  <!-- Implement cards to display results
+       Card should include: Category, Value, airdate? (maybe small), # of clues?
+       Should link to clue, which should link to answer -->
+  {% for result in response %}
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body">
+	<h4 class="card-title"> {{ result.question }} </h4>
+	<h6 class="card-subtitle mb-2 text-muted"> {{ result.airdate }}</h6>
+	<p class="card-text"> <b> Worth {{result.value}} points.</b> <br>
+	   Category:  {{ result.category.title }}
+	</p>
+	<p style="color:#00c7ff;" onclick="$(this.parentElement.lastElementChild).show()" class="card-link">View Answer</p>
+	<p class="ans" style="display: none; color:#EA526F"> <em > <b> {{result.answer}} </b> </em> </p> 
+	
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

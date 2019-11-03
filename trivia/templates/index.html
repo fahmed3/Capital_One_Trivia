@@ -1,15 +1,110 @@
 {% extends "base.html" %}
 
 {% block head %}
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+<style type="text/css">
+  .bootstrap-iso{
+      padding-left: 5em;
+      padding-right: 5em;	
+  }
+</style>
 {% endblock %}
 
 
 {% block content %}
-<div class="container">
-  <form class="form-inline md-form mr-auto mb-4">
-    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-    <button class="btn aqua-gradient btn-rounded btn-sm my-0" type="submit">Search</button>
-  </form>
+<div class="jumbotron" >
+  <h1>Trivia Questions</h1>
+  <p>Search for trivia clues from any season of Jeopardy!
+    You can either search questions to learn from them, or try the challenge mode where you can test your knowledge.
+  </p>
+</div>
+
+
+
+<!-- Used form builder: https://formden.com/form-builder/ -->
+<!-- HTML Form (wrapped in a .bootstrap-iso div) -->
+<div class="bootstrap-iso">
+ <div class="container-fluid">
+  <div class="row">
+   <div class="col-md-6 col-sm-6 col-xs-12">
+    <form method="post" action="/results">
+     <div class="form-group ">
+      <label class="control-label " for="max_date">
+       From
+      </label>
+      <input class="form-control" id="max_date" name="max_date" placeholder="MM/DD/YYYY" type="text"/>
+      <span class="help-block" id="hint_max_date">
+       Find clues from after this airing date.
+      </span>
+     </div>
+     <div class="form-group ">
+      <label class="control-label " for="min_date">
+       To
+      </label>
+      <input class="form-control" id="min_date" name="min_date" placeholder="MM/DD/YYYY" type="text"/>
+      <span class="help-block" id="hint_min_date">
+       Find clues from before this airing date.
+      </span>
+     </div>
+     <div class="form-group ">
+      <label class="control-label " for="category">
+       Category
+      </label>
+      <input class="form-control" id="category" name="category" placeholder="Science, Literature, Potpurri..." type="text"/>
+      <span class="help-block" id="hint_category">
+       Choose any topic.
+      </span>
+     </div>
+     <div class="form-group ">
+      <label class="control-label " for="value">
+       Value ($)
+      </label>
+      <select class="select form-control" id="value" name="value">
+       <option value="">
+        ----
+       </option>
+       <option value="100">
+        100
+       </option>
+       <option value="200">
+        200
+       </option>
+       <option value="300">
+        300
+       </option>
+       <option value="400">
+        400
+       </option>
+       <option value="500">
+        500
+       </option>
+       <option value="600">
+        600
+       </option>
+       <option value="800">
+        800
+       </option>
+       <option value="1000">
+        1000
+       </option>
+      </select>
+      <span class="help-block" id="hint_value">
+       Choose your level of difficulty.
+      </span>
+     </div>
+     <div class="form-group">
+      <div>
+       <button class="btn btn-primary " name="submit" type="submit">
+        Submit
+       </button>
+      </div>
+     </div>
+    </form>
+   </div>
+  </div>
+ </div>
 </div>
 
 {% endblock %}
+
+
