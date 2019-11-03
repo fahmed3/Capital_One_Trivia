@@ -37,9 +37,9 @@ def call_api(e_date, l_date,category, difficulty):
     return response
 
 if __name__ == '__main__':
-    #http_server = HTTPServer(WSGIContainer(app))
-    #http_server.listen(os.getenv('PORT') or 5000)
-    #IOLoop.instance().start()
-    app.run(debug = True)
+    http_server = HTTPServer(WSGIContainer(app))
+    http_server.listen(os.getenv('PORT') or 5000)
+    IOLoop.instance().start()
+    #app.run(debug = True)
 
 
