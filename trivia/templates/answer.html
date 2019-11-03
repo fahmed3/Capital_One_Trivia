@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid" style="padding-top:2rem">
+  {% if correct %}
+  <h1 style="color:#03a300"> Correct! </h1>
+  {% else %}
+  {% if out_of_time %}
+  <h1 style="color:#EA526F"> Time's up.</h1>
+  {% else %}
+  <h1 style="color:#EA526F"> Wrong.</h1>  
+  {% endif %}
+  {% endif %}
+  <h1> The answer was <em> {{c_answer}}</em>. </h1>
+
+  <a href="/challenge" class="btn btn-outline-info"> Try another one! </a>
+  <a href="/" class="btn btn-outline-info"> Back to home </a>
+</div>
+
+{% endblock %}
+
+{% block customjs %}
+{% endblock %}
+
+

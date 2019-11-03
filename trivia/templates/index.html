@@ -15,7 +15,9 @@
 <div class="jumbotron" >
   <h1>Trivia Questions</h1>
   <p>Search for trivia clues from any season of Jeopardy!
-    You can either search questions to learn from them, or try the challenge mode where you can test your knowledge.
+    You can either search questions to learn from them, or try the
+    <a href="/challenge" class="btn btn-outline-info" style="background-color: #00c7ff; color:white"> Challenge </a>
+    mode, where you can test your knowledge.
   </p>
 </div>
 
@@ -29,30 +31,21 @@
    <div class="col-md-6 col-sm-6 col-xs-12">
     <form method="post" action="/results">
      <div class="form-group ">
-      <label class="control-label " for="max_date">
-       From
-      </label>
-      <input class="form-control" id="max_date" name="max_date" placeholder="MM/DD/YYYY" type="text"/>
-      <span class="help-block" id="hint_max_date">
-       Find clues from after this airing date.
-      </span>
-     </div>
-     <div class="form-group ">
       <label class="control-label " for="min_date">
        To
       </label>
       <input class="form-control" id="min_date" name="min_date" placeholder="MM/DD/YYYY" type="text"/>
       <span class="help-block" id="hint_min_date">
-       Find clues from before this airing date.
+       Find clues from after this airing date.
       </span>
      </div>
      <div class="form-group ">
-      <label class="control-label " for="category">
-       Category
+      <label class="control-label " for="max_date">
+       From
       </label>
-      <input class="form-control" id="category" name="category" placeholder="Science, Literature, Potpurri..." type="text"/>
-      <span class="help-block" id="hint_category">
-       Choose any topic.
+      <input class="form-control" id="max_date" name="max_date" placeholder="MM/DD/YYYY" type="text"/>
+      <span class="help-block" id="hint_max_date">
+       Find clues from before this airing date.
       </span>
      </div>
      <div class="form-group ">
@@ -99,7 +92,11 @@
        </button>
       </div>
      </div>
-    </form>
+     <h5> Or you can search by <a href="http://jservice.io/search"> Category</a>. </h5>
+
+    </form>    
+   </div>
+   <div class="col-md-6 col-sm-6 col-xs-12">
    </div>
   </div>
  </div>

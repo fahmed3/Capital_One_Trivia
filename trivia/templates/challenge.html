@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+<style type="text/css">
+  #myProgress{
+      width: 100%;
+      background-color: lightgray;
+  }
+
+  #myBar{
+      width: 0%;
+      height: 30px;
+      background-color: #00c7ff;
+  }
+</style>
+
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron" >
+  <h1>{{response.question}}</h1> <br>
+  <h4 style="color:white"> Worth {{ response.value }} points. </h4>
+  <br> <br>
+    <form method="POST" action="/answer" id="answer_form">
+      <div class="form-group">
+	<input class="form-control" name="answer" placeholder="Your answer" type="text" />
+	<input class="form-control" name="c_answer" type="text" style="display: none;" value='{{response.answer}}' />
+	<button class="btn btn-outline-info" type="submit"> Check </button>
+      </div>
+    </form>
+<div id="myProgress">
+  <div id="myBar"></div>
+</div>
+
+</div>
+
+
+{% endblock %}
+
+{% block customjs %}
+
+<script>
+  function move() {
+      var elem = document.getElementById("myBar");
+      var width = 0;
+      var id = setInterval(frame, 30);
+      function frame() {
+          if (width >= 100) {
+              clearInterval(id);
+	      document.getElementsByName('answer')[0].value = "OUT_OF_TIME"
+	      document.getElementsByTagName('form')[0].submit()
+          } else {
+              width += 0.14;
+              elem.style.width = width + '%';
+          }
+      }
+  }
+
+  document.addEventListener('DOMContentLoaded', move);
+
+</script>
+{% endblock %}

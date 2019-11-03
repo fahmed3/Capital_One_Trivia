@@ -15,26 +15,54 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-#can't choose both early date and late date at once
-#can't choose category
-
 @app.route('/results', methods = ['GET', 'POST'])
 def results():
     if request.method == 'POST':
-        earliest = request.form.get('max_date')
-        latest = request.form.get('min_date')
-        category = request.form.get('category')
+        earliest = request.form.get('min_date')
+        latest = request.form.get('max_date')
         difficulty = request.form.get('value')
-    response = call_api(earliest, latest, category, difficulty)
+    response = call_api(earliest, latest, difficulty)
     return render_template('results.html', response = response)
     
-def call_api(e_date, l_date,category, difficulty):
-    url = 'http://jservice.io/api/clues?max_date=%s&min_date=%s&value=%s' % (e_date, l_date, difficulty)
-    #search through categories for relevant category's category id's
-    #categories = get_id(category)
+
+#can't choose category
+def call_api(min_date, max_date, difficulty):
+    if(min_date == ""):
+        min_date = "1984-09-10"
+    if(max_date == ""):
+        max_date = "2015-04-01"    
+    url = "http://jservice.io/api/clues?min_date=%s&max_date=%s&value=%s" % (min_date, max_date, difficulty)
     #print(url)
     response = requests.get(url).json()
     return response
+
+@app.route("/challenge", methods = ['GET', 'POST'])
+def challenge():
+    response = requests.get("http://jservice.io/api/random").json()[0]
+    return render_template("challenge.html", response = response)
+
+@app.route("/answer", methods = ['GET', 'POST'])
+def answer():
+    if request.method == 'POST':
+        answer = request.form.get('answer')
+        c_answer = request.form.get('c_answer')
+    if answer.lower() == c_answer.lower():
+        return render_template("answer.html",
+                               correct=True,
+                               c_answer = c_answer)
+    else:
+        #if wrong because time ran out
+        if answer == "OUT_OF_TIME":
+            return render_template("answer.html",
+                                   correct=False,
+                                   out_of_time=True,
+                                   c_answer = c_answer)
+        #answer submitted on time but wrong anyway
+        return render_template("answer.html",
+                               correct=False,
+                               out_of_time=False,
+                               c_answer = c_answer)
+        
 
 if __name__ == '__main__':
     http_server = HTTPServer(WSGIContainer(app))
